@@ -1,0 +1,56 @@
+﻿@model dynamic;
+
+@{
+    ViewData["Title"] = "bookListView";
+}
+
+<table style="direction:rtl;margin:auto;margin-top:20px;">
+    <tr>
+        <td style="width:30%">
+            <h5 class="display-8">کتابفروشی آنلاین</h5>
+        </td>
+        <td style="width:30%">
+            <a asp-area="" asp-action="Create">افزودن کتاب</a>
+        </td>
+        <td style="width:30%;display: inherit;">
+            <form method="get" action="Book\bookSearch">
+            <input class="input-group-text" type="submit" value="جستجو" style="float:left;width:70px;height:38px">
+            <input type="text" style="float:right;width:160px;" id="bookName"
+                   class="form-control" placeholder="نام کتاب" name="bookName" aria-describedby="basic-addon1">
+            </form>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3">
+            <hr />
+            <h5 class="display-10">آخرین کتابها:</h5>
+            @foreach (var item in Model.bookList)
+            {
+                <div class="boxOut">
+                    <div class="box">
+                        <p style="">@item.Name</p>
+                        <p style="text-decoration:underline">@item.Author</p>
+                        <p style="">@item.Price تومان</p>
+                    </div>
+                </div>
+            }
+
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3">
+            <hr />
+            <h5 class="display-10">دسته بندی ها:</h5>
+            @foreach (var item in Model.bookGroupList)
+            {
+                <div class="boxOut">
+                    <div class="box">
+                        <p style="">@item.Name</p>
+                        <p style="text-decoration:underline">@item.Author</p>
+                        <p style="">@item.Price تومان</p>
+                    </div>
+                </div>
+            }
+        </td>
+    </tr>
+</table>

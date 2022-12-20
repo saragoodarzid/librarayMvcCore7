@@ -1,0 +1,57 @@
+﻿@model IEnumerable<librarySampleMVC.Models.Dto.BookDto>
+
+@{
+    ViewData["Title"] = "bookSearch";
+}
+
+<div style ="margin:auto;margin-top:20px;">
+    <a asp-action="Index">برگشت به صفحه اصلی</a>
+</div>
+
+<table class="table" style="direction:rtl;margin:auto;margin-top:20px;">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Shabak)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PublisherDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Shabak)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PublisherDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>           
+            </tr>
+    }
+    @if(Model.Count() ==0)
+    {
+            <tr><td colspan="5">داده ای برای نمایش وجود ندارد</td></tr>
+    }
+    </tbody>
+</table>

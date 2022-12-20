@@ -1,0 +1,44 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+@font-face {
+    font-family: 'IranSans';
+    src: url('../fonts/iransansweb(fanum).eot') format('embedded-opentype');
+    src: url('../fonts/iransansweb(fanum).woff') format('woff');
+    src: url('../fonts/iransansweb(fanum).ttf') format('truetype');
+}
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    font-family: 'IranSans' !important;
+    margin-bottom: 60px;
+}
+
+
+.boxOut {
+    float: right;
+    margin: 25px;
+    padding-top: 20px;
+}
+
+.box {
+    text-align: center;
+    border-radius: 30px;
+    height: 150px;
+    width: 200px;
+    border: 1px solid #0dcaf094;
+    padding-top: 20px;
+}
