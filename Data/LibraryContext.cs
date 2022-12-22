@@ -1,9 +1,5 @@
 ﻿using librarySampleMVC.Models.Entity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Migrations;
-using System.Reflection.Metadata;
-using librarySampleMVC.Models.Dto;
-using librarySampleMVC.Models;
 
 namespace librarySampleMVC.Data;
 //test ast
@@ -26,17 +22,13 @@ public class LibraryContext : DbContext
     }
 
 
-    public DbSet<Publisher> Publishers { get; set; }
     public DbSet<Group> Group { get; set; }
+    public DbSet<Publisher> Publishers { get; set; }
+    public DbSet<Book> Book { get; set; }
     public DbSet<BookGroups> BookGroups { get; set; }
-    public DbSet<Book> Books { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        //    modelBuilder.Entity<Book>();
-        //    modelBuilder.Entity<Group>();
-        //    modelBuilder.Entity<BookGroups>();
-        //    modelBuilder.Entity<Publisher>();
         modelBuilder.Entity<Group>().HasData(new Group {ID=1, Name="رمان",Comment="-----" },
                                                 new Group {ID=2, Name = "تخیلی" ,Comment="---"},
                                                 new Group {ID=3, Name="علمی" ,Comment="پر فروشترین"},
@@ -93,10 +85,50 @@ public class LibraryContext : DbContext
             }
             );
 
-        //modelBuilder.Entity<BookGroups>.HasData(new BookGroups
-        //{
-        //    ID= 1,Books
-        //})
+        modelBuilder.Entity<BookGroups>().HasData(
+            new BookGroups
+            {
+                ID = 1,
+                bookId = 1,
+                groupId = 1
+            }
+            , new BookGroups
+            {
+                ID = 2,
+                bookId = 2,
+                groupId = 1
+            }, new BookGroups
+            {
+                ID = 3,
+                bookId = 3,
+                groupId = 1
+            }, new BookGroups
+            {
+                ID = 4,
+                bookId = 1,
+                groupId = 2
+            }, new BookGroups
+            {
+                ID = 5,
+                bookId = 2,
+                groupId = 2
+            }, new BookGroups
+            {
+                ID = 6,
+                bookId = 1,
+                groupId = 3
+            }, new BookGroups
+            {
+                ID = 7,
+                bookId = 1,
+                groupId = 4
+            }, new BookGroups
+            {
+                ID = 8,
+                bookId = 2,
+                groupId = 4
+            }
+        );
 
     }
 

@@ -43,7 +43,7 @@ namespace librarySampleMVC.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Books",
+                name: "Book",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
@@ -57,9 +57,9 @@ namespace librarySampleMVC.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Books", x => x.ID);
+                    table.PrimaryKey("PK_Book", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Books_Publishers_publisherId",
+                        name: "FK_Book_Publishers_publisherId",
                         column: x => x.publisherId,
                         principalTable: "Publishers",
                         principalColumn: "ID",
@@ -72,21 +72,21 @@ namespace librarySampleMVC.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BooksID = table.Column<int>(type: "int", nullable: false),
-                    GroupsID = table.Column<int>(type: "int", nullable: false)
+                    bookId = table.Column<int>(type: "int", nullable: false),
+                    groupId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_BookGroups", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_BookGroups_Books_BooksID",
-                        column: x => x.BooksID,
-                        principalTable: "Books",
+                        name: "FK_BookGroups_Book_bookId",
+                        column: x => x.bookId,
+                        principalTable: "Book",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_BookGroups_Group_GroupsID",
-                        column: x => x.GroupsID,
+                        name: "FK_BookGroups_Group_groupId",
+                        column: x => x.groupId,
                         principalTable: "Group",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
@@ -108,38 +108,53 @@ namespace librarySampleMVC.Migrations
                 columns: new[] { "ID", "Comment", "EstablishmentDate", "Name" },
                 values: new object[,]
                 {
-                    { 1, "ناشر برتر سال 1400", new DateTime(2022, 12, 18, 20, 11, 36, 670, DateTimeKind.Local).AddTicks(2464), "یاقوت" },
-                    { 2, "ناشر برتر سال 1401", new DateTime(2022, 12, 18, 20, 11, 36, 670, DateTimeKind.Local).AddTicks(2533), "قلم چی" },
-                    { 3, "ناشر معمولی", new DateTime(2022, 12, 18, 20, 11, 36, 670, DateTimeKind.Local).AddTicks(2541), "خیلی سبز" },
-                    { 4, "ناشر مبتدی", new DateTime(2022, 12, 18, 20, 11, 36, 670, DateTimeKind.Local).AddTicks(2546), "بنفشه" },
-                    { 5, "ناشر غیرفعال", new DateTime(2022, 12, 18, 20, 11, 36, 670, DateTimeKind.Local).AddTicks(2550), "فتح" }
+                    { 1, "ناشر برتر سال 1400", new DateTime(2022, 12, 22, 19, 42, 15, 820, DateTimeKind.Local).AddTicks(4010), "یاقوت" },
+                    { 2, "ناشر برتر سال 1401", new DateTime(2022, 12, 22, 19, 42, 15, 820, DateTimeKind.Local).AddTicks(4087), "قلم چی" },
+                    { 3, "ناشر معمولی", new DateTime(2022, 12, 22, 19, 42, 15, 820, DateTimeKind.Local).AddTicks(4096), "خیلی سبز" },
+                    { 4, "ناشر مبتدی", new DateTime(2022, 12, 22, 19, 42, 15, 820, DateTimeKind.Local).AddTicks(4105), "بنفشه" },
+                    { 5, "ناشر غیرفعال", new DateTime(2022, 12, 22, 19, 42, 15, 820, DateTimeKind.Local).AddTicks(4113), "فتح" }
                 });
 
             migrationBuilder.InsertData(
-                table: "Books",
+                table: "Book",
                 columns: new[] { "ID", "Author", "Name", "Price", "PublisherDate", "Shabak", "publisherId" },
                 values: new object[,]
                 {
-                    { 1, "نویسنده اول", "کتاب اول", 100000L, new DateTime(2022, 12, 18, 20, 11, 36, 670, DateTimeKind.Local).AddTicks(2704), "123-1-125", 5 },
-                    { 2, "نویسنده دوم", "کتاب دوم", 100000L, new DateTime(2022, 12, 18, 20, 11, 36, 670, DateTimeKind.Local).AddTicks(2713), "123-2-125", 1 },
-                    { 3, "نویسنده سوم", "کتاب سوم", 100000L, new DateTime(2022, 12, 18, 20, 11, 36, 670, DateTimeKind.Local).AddTicks(2717), "123-3-125", 3 },
-                    { 4, "نویسنده چهارم", "کتاب چهارم", 100000L, new DateTime(2022, 12, 18, 20, 11, 36, 670, DateTimeKind.Local).AddTicks(2725), "123-4-125", 3 }
+                    { 1, "نویسنده اول", "کتاب اول", 100000L, new DateTime(2022, 12, 22, 19, 42, 15, 820, DateTimeKind.Local).AddTicks(4194), "123-1-125", 5 },
+                    { 2, "نویسنده دوم", "کتاب دوم", 100000L, new DateTime(2022, 12, 22, 19, 42, 15, 820, DateTimeKind.Local).AddTicks(4203), "123-2-125", 1 },
+                    { 3, "نویسنده سوم", "کتاب سوم", 100000L, new DateTime(2022, 12, 22, 19, 42, 15, 820, DateTimeKind.Local).AddTicks(4216), "123-3-125", 3 },
+                    { 4, "نویسنده چهارم", "کتاب چهارم", 100000L, new DateTime(2022, 12, 22, 19, 42, 15, 820, DateTimeKind.Local).AddTicks(4224), "123-4-125", 3 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "BookGroups",
+                columns: new[] { "ID", "bookId", "groupId" },
+                values: new object[,]
+                {
+                    { 1, 1, 1 },
+                    { 2, 2, 1 },
+                    { 3, 3, 1 },
+                    { 4, 1, 2 },
+                    { 5, 2, 2 },
+                    { 6, 1, 3 },
+                    { 7, 1, 4 },
+                    { 8, 2, 4 }
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_BookGroups_BooksID",
-                table: "BookGroups",
-                column: "BooksID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_BookGroups_GroupsID",
-                table: "BookGroups",
-                column: "GroupsID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Books_publisherId",
-                table: "Books",
+                name: "IX_Book_publisherId",
+                table: "Book",
                 column: "publisherId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BookGroups_bookId",
+                table: "BookGroups",
+                column: "bookId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BookGroups_groupId",
+                table: "BookGroups",
+                column: "groupId");
         }
 
         /// <inheritdoc />
@@ -149,7 +164,7 @@ namespace librarySampleMVC.Migrations
                 name: "BookGroups");
 
             migrationBuilder.DropTable(
-                name: "Books");
+                name: "Book");
 
             migrationBuilder.DropTable(
                 name: "Group");

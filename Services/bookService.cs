@@ -24,7 +24,7 @@ namespace librarySampleMVC.Services
 
         public List<BookDto> bookSearch(String bookname)
         {
-             List<BookDto> booksLst = libraryContext.Books.Where(x => x.Name.Contains(bookname))
+             List<BookDto> booksLst = libraryContext.Book.Where(x => x.Name.Contains(bookname))
                                     .Select(c => new BookDto
                                     {
                                         Name = c.Name,
@@ -38,32 +38,45 @@ namespace librarySampleMVC.Services
 
         public async Task<List<Book>> book4Last()
         {
-            List<Book> booksLst = libraryContext.Books.ToList().OrderByDescending(x=>x.PublisherDate).TakeLast(4).ToList();
+            List<Book> booksLst = libraryContext.Book.ToList().OrderByDescending(x=>x.PublisherDate).TakeLast(4).ToList();
             return booksLst;
         }
 
-        public async Task<List<Book>> book3Last()
+        public async Task<List<BookDto>> book3Last()
         {
-            var bookGroupMax = libraryContext.BookGroups.GroupBy(x => x.Books.ID).Select(s => new
+            List<BookDto> lstbook = new List<BookDto>();
+            var lstbooks = (from b in libraryContext.Book
+                           join bg in libraryContext.BookGroups
+                          on b.ID equals bg.bookId into subs
+                          from sub in subs.DefaultIfEmpty()
+                          group sub by new { b.ID,b.Name } into gr
+                          select new
+                          {
+                              gr.Key.ID,
+                              gr.Key.Name,
+                              total = gr.Count(x => x != null)
+                          }).ToList();
+            if(lstbooks.Count>0)
             {
-                count = s.Count(),
-                ID = s.Key
-            }).ToList().OrderByDescending(x => x.count).TakeLast(3).ToList();
-            
-            //var bookSelected = libraryContext.Books
+                lstbooks = lstbooks.OrderByDescending(x => x.total).ToList();
+                lstbook = lstbooks.Take(3).Select(d=>new BookDto
+                {
+                    Name = d.Name,
+                    count = d.total,
+                }).ToList();
 
-            List<Book> lstbook = libraryContext.Books.Where(x=> bookGroupMax.Any(y=>y.ID==x.ID)).ToList() ;
+            }
             return lstbook;
         }
 
         public void save(Book book)
         {
-            libraryContext.Books.Add(book);
+            libraryContext.Book.Add(book);
 
             BookGroups bookGroups = new BookGroups
             {
-                Books = book,
-                Groups = book.Group
+                Book = book,
+                Group = book.Group
             };
             libraryContext.BookGroups.Add(bookGroups);
             libraryContext.SaveChanges();

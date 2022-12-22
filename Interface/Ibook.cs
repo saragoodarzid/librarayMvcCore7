@@ -9,7 +9,7 @@ namespace librarySampleMVC.Interface
 
         Task<List<Book>> book4Last();
 
-        Task<List<Book>> book3Last();
+        Task<List<BookDto>> book3Last();
 
         void save(Book book);
 

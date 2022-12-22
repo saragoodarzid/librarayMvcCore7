@@ -22,11 +22,14 @@ namespace librarySampleMVC.Controllers
             this.ipublisher = ipublisher;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             dynamic bookModel = new ExpandoObject();
-            bookModel.bookList = ibook.book4Last().Result;
-            bookModel.bookGroupList = ibook.book4Last().Result;
+            Task<List<Book>> b =   ibook.book4Last();
+            Task<List<BookDto>> c =   ibook.book3Last();
+            //bookModel.bookGroupList = ibook.book3Last().Result;
+            bookModel.bookList = await b;
+            bookModel.bookGroupList = await c;
             return View(bookModel);
         }
 

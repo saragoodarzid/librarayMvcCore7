@@ -22,29 +22,6 @@ namespace librarySampleMVC.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("librarySampleMVC.Models.BookGroups", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<int>("BooksID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("GroupsID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("BooksID");
-
-                    b.HasIndex("GroupsID");
-
-                    b.ToTable("BookGroups");
-                });
-
             modelBuilder.Entity("librarySampleMVC.Models.Entity.Book", b =>
                 {
                     b.Property<int>("ID")
@@ -78,7 +55,7 @@ namespace librarySampleMVC.Migrations
 
                     b.HasIndex("publisherId");
 
-                    b.ToTable("Books");
+                    b.ToTable("Book");
 
                     b.HasData(
                         new
@@ -87,7 +64,7 @@ namespace librarySampleMVC.Migrations
                             Author = "نویسنده اول",
                             Name = "کتاب اول",
                             Price = 100000L,
-                            PublisherDate = new DateTime(2022, 12, 18, 20, 11, 36, 670, DateTimeKind.Local).AddTicks(2704),
+                            PublisherDate = new DateTime(2022, 12, 22, 19, 42, 15, 820, DateTimeKind.Local).AddTicks(4194),
                             Shabak = "123-1-125",
                             publisherId = 5
                         },
@@ -97,7 +74,7 @@ namespace librarySampleMVC.Migrations
                             Author = "نویسنده دوم",
                             Name = "کتاب دوم",
                             Price = 100000L,
-                            PublisherDate = new DateTime(2022, 12, 18, 20, 11, 36, 670, DateTimeKind.Local).AddTicks(2713),
+                            PublisherDate = new DateTime(2022, 12, 22, 19, 42, 15, 820, DateTimeKind.Local).AddTicks(4203),
                             Shabak = "123-2-125",
                             publisherId = 1
                         },
@@ -107,7 +84,7 @@ namespace librarySampleMVC.Migrations
                             Author = "نویسنده سوم",
                             Name = "کتاب سوم",
                             Price = 100000L,
-                            PublisherDate = new DateTime(2022, 12, 18, 20, 11, 36, 670, DateTimeKind.Local).AddTicks(2717),
+                            PublisherDate = new DateTime(2022, 12, 22, 19, 42, 15, 820, DateTimeKind.Local).AddTicks(4216),
                             Shabak = "123-3-125",
                             publisherId = 3
                         },
@@ -117,9 +94,82 @@ namespace librarySampleMVC.Migrations
                             Author = "نویسنده چهارم",
                             Name = "کتاب چهارم",
                             Price = 100000L,
-                            PublisherDate = new DateTime(2022, 12, 18, 20, 11, 36, 670, DateTimeKind.Local).AddTicks(2725),
+                            PublisherDate = new DateTime(2022, 12, 22, 19, 42, 15, 820, DateTimeKind.Local).AddTicks(4224),
                             Shabak = "123-4-125",
                             publisherId = 3
+                        });
+                });
+
+            modelBuilder.Entity("librarySampleMVC.Models.Entity.BookGroups", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<int>("bookId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("groupId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("bookId");
+
+                    b.HasIndex("groupId");
+
+                    b.ToTable("BookGroups");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            bookId = 1,
+                            groupId = 1
+                        },
+                        new
+                        {
+                            ID = 2,
+                            bookId = 2,
+                            groupId = 1
+                        },
+                        new
+                        {
+                            ID = 3,
+                            bookId = 3,
+                            groupId = 1
+                        },
+                        new
+                        {
+                            ID = 4,
+                            bookId = 1,
+                            groupId = 2
+                        },
+                        new
+                        {
+                            ID = 5,
+                            bookId = 2,
+                            groupId = 2
+                        },
+                        new
+                        {
+                            ID = 6,
+                            bookId = 1,
+                            groupId = 3
+                        },
+                        new
+                        {
+                            ID = 7,
+                            bookId = 1,
+                            groupId = 4
+                        },
+                        new
+                        {
+                            ID = 8,
+                            bookId = 2,
+                            groupId = 4
                         });
                 });
 
@@ -198,56 +248,37 @@ namespace librarySampleMVC.Migrations
                         {
                             ID = 1,
                             Comment = "ناشر برتر سال 1400",
-                            EstablishmentDate = new DateTime(2022, 12, 18, 20, 11, 36, 670, DateTimeKind.Local).AddTicks(2464),
+                            EstablishmentDate = new DateTime(2022, 12, 22, 19, 42, 15, 820, DateTimeKind.Local).AddTicks(4010),
                             Name = "یاقوت"
                         },
                         new
                         {
                             ID = 2,
                             Comment = "ناشر برتر سال 1401",
-                            EstablishmentDate = new DateTime(2022, 12, 18, 20, 11, 36, 670, DateTimeKind.Local).AddTicks(2533),
+                            EstablishmentDate = new DateTime(2022, 12, 22, 19, 42, 15, 820, DateTimeKind.Local).AddTicks(4087),
                             Name = "قلم چی"
                         },
                         new
                         {
                             ID = 3,
                             Comment = "ناشر معمولی",
-                            EstablishmentDate = new DateTime(2022, 12, 18, 20, 11, 36, 670, DateTimeKind.Local).AddTicks(2541),
+                            EstablishmentDate = new DateTime(2022, 12, 22, 19, 42, 15, 820, DateTimeKind.Local).AddTicks(4096),
                             Name = "خیلی سبز"
                         },
                         new
                         {
                             ID = 4,
                             Comment = "ناشر مبتدی",
-                            EstablishmentDate = new DateTime(2022, 12, 18, 20, 11, 36, 670, DateTimeKind.Local).AddTicks(2546),
+                            EstablishmentDate = new DateTime(2022, 12, 22, 19, 42, 15, 820, DateTimeKind.Local).AddTicks(4105),
                             Name = "بنفشه"
                         },
                         new
                         {
                             ID = 5,
                             Comment = "ناشر غیرفعال",
-                            EstablishmentDate = new DateTime(2022, 12, 18, 20, 11, 36, 670, DateTimeKind.Local).AddTicks(2550),
+                            EstablishmentDate = new DateTime(2022, 12, 22, 19, 42, 15, 820, DateTimeKind.Local).AddTicks(4113),
                             Name = "فتح"
                         });
-                });
-
-            modelBuilder.Entity("librarySampleMVC.Models.BookGroups", b =>
-                {
-                    b.HasOne("librarySampleMVC.Models.Entity.Book", "Books")
-                        .WithMany()
-                        .HasForeignKey("BooksID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("librarySampleMVC.Models.Entity.Group", "Groups")
-                        .WithMany()
-                        .HasForeignKey("GroupsID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Books");
-
-                    b.Navigation("Groups");
                 });
 
             modelBuilder.Entity("librarySampleMVC.Models.Entity.Book", b =>
@@ -259,6 +290,25 @@ namespace librarySampleMVC.Migrations
                         .IsRequired();
 
                     b.Navigation("publisher");
+                });
+
+            modelBuilder.Entity("librarySampleMVC.Models.Entity.BookGroups", b =>
+                {
+                    b.HasOne("librarySampleMVC.Models.Entity.Book", "Book")
+                        .WithMany()
+                        .HasForeignKey("bookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("librarySampleMVC.Models.Entity.Group", "Group")
+                        .WithMany()
+                        .HasForeignKey("groupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Book");
+
+                    b.Navigation("Group");
                 });
 #pragma warning restore 612, 618
         }

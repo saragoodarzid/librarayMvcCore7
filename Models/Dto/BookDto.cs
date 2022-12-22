@@ -47,5 +47,11 @@ namespace librarySampleMVC.Models.Dto
         [NotMapped]
         public SelectList publisherLst { get; set; }
 
+        [NotMapped]
+        public int count { get; set; }
+
+        [NotMapped]
+        public string nameGroup { get; set; }
+
     }
 }
