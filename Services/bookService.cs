@@ -39,7 +39,7 @@ namespace librarySampleMVC.Services
 
         public async Task<List<Book>> book4Last()
         {
-           // String d = datePicker.toshamsi(DateTime.Now);
+            String d = DateTime.Now.toshamsi();
             List<Book> booksLst = libraryContext.Book.ToList().OrderByDescending(x=>x.PublisherDate).TakeLast(4).ToList();
             return booksLst;
         }
