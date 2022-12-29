@@ -3,6 +3,7 @@ using librarySampleMVC.Interface;
 using librarySampleMVC.Models;
 using librarySampleMVC.Models.Dto;
 using librarySampleMVC.Models.Entity;
+using librarySampleMVC.Utility;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
@@ -38,6 +39,7 @@ namespace librarySampleMVC.Services
 
         public async Task<List<Book>> book4Last()
         {
+           // String d = datePicker.toshamsi(DateTime.Now);
             List<Book> booksLst = libraryContext.Book.ToList().OrderByDescending(x=>x.PublisherDate).TakeLast(4).ToList();
             return booksLst;
         }
