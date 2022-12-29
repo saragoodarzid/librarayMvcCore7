@@ -71,15 +71,18 @@ namespace librarySampleMVC.Services
 
         public void save(Book book)
         {
-            libraryContext.Book.Add(book);
+            var genericService = new genericService<Book>(libraryContext);
+            genericService.Add(book);
+          //  libraryContext.Book.Add(book);
 
             BookGroups bookGroups = new BookGroups
             {
                 Book = book,
                 Group = book.Group
             };
-            libraryContext.BookGroups.Add(bookGroups);
-            libraryContext.SaveChanges();
+            //libraryContext.BookGroups.Add(bookGroups);
+            var genericServiceb = new genericService<BookGroups>(libraryContext);
+            genericServiceb.Add(bookGroups);
         }
     }
 }
