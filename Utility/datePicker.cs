@@ -9,7 +9,7 @@ namespace librarySampleMVC.Utility
         {
             PersianCalendar persian = new PersianCalendar();
             string d = $"{persian.GetYear(dateTime)}/{persian.GetMonth(dateTime)}/{persian.GetDayOfMonth(dateTime)}";
-            return $"{persian.GetYear(dateTime)} / {persian.GetMonth(dateTime)} /{persian.GetDayOfMonth(dateTime)}";
+            return $"{persian.GetYear(dateTime)}/{persian.GetMonth(dateTime)}/{persian.GetDayOfMonth(dateTime)}";
         }
     }
 }
